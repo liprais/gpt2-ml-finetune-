@@ -18,7 +18,7 @@
 import tensorflow as tf
 import sys
 import os
-sys.path.append('/data/home/share1/gpt2-ml')
+sys.path.append('../')
 
 from train.dataloader import input_fn_builder
 from train.modeling import model_fn_builder, GroverConfig

@@ -5,7 +5,7 @@ NOTE: You will want to do this using several processes. I did this on an AWS mac
 as that's where I had the deduplicated RealNews dataset.
 """
 import argparse
-import ujson as json
+import json
 # from sample.encoder import get_encoder, tokenize_for_grover_training, detokenize, sliding_window, create_int_feature
 import random
 import tensorflow as tf
@@ -13,7 +13,7 @@ import collections
 import os
 import sys
 from tempfile import TemporaryDirectory
-sys.path.append('/data/home/share1/gpt2-ml-Finetune')
+sys.path.append('../')
 from tokenization import tokenization
 
 parser = argparse.ArgumentParser(description='SCRAPE!')
@@ -65,8 +65,7 @@ parser.add_argument(
 args = parser.parse_args()
 random.seed(args.seed + args.fold)
 
-tokenizer = tokenization.FullTokenizer(
-    vocab_file="/data/home/share1/gpt2-ml/dataset/bert-base-chinese-vocab.txt", do_lower_case=True)
+tokenizer = tokenization.FullTokenizer(vocab_file="bert-base-chinese-vocab.txt", do_lower_case=True)
 
 class S3TFRecordWriter(object):
     def __init__(self, fn):
@@ -184,7 +183,7 @@ def buffered_and_sliding_window_article_iterator(tokenizer, final_desired_size=1
 
 # OK now write the tfrecord file
 total_written = 0
-train_file = args.base_fn + 'train_my_{:04d}.tfrecord'.format(args.fold)
+train_file = 'train_my_{:04d}.tfrecord'.format(args.fold)
 with S3TFRecordWriter(train_file) as train_writer:
     # for article in buffered_and_sliding_window_article_iterator(tokenizer,
     #                                                             final_desired_size=1024):

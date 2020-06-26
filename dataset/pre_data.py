@@ -15,7 +15,7 @@ def get_data(filepath,outfile):
             data_list = []
             strat = 0
             end = 1024
-            pattern1 =  r"^[^。！？]*"
+            pattern1 =  r"^[。！？]*"
             pattern2 = r'.*[。！？]'
             f_json = open(outfile,'a',encoding='utf-8')
             while strat<= len(data) :
